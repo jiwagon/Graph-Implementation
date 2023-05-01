@@ -7,7 +7,7 @@ public class Location {
 
     public Location(String name) {
         this.locationName = name;
-        this.edges = new ArrayList<distanceEdge>();
+        this.distedges = new ArrayList<distanceEdge>();
     }
 
     public String getName() {
