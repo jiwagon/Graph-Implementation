@@ -79,7 +79,7 @@ class LocationGraphTest {
     }
 
     @Test
-    void testFindDistanceDepthFirst() {
+    void findDistanceDepthFirst() {
         LocationGraph graph = new LocationGraph();
 
         graph.addLocation("New York");
@@ -106,10 +106,7 @@ class LocationGraphTest {
         assertEquals(-1.0, graph.findDistanceBreadthFirst("Boston","Los Angeles"));
         // return -1.0 if start and end locations are the same
         assertEquals(-1.0, graph.findDistanceBreadthFirst("New York","New York"));
-
-        System.out.println(graph);
     }
-
     @Test
     void detectCycle() {
         LocationGraph graph = new LocationGraph();
@@ -127,5 +124,43 @@ class LocationGraphTest {
         assertTrue(graph.detectCycle());
         //return false if there is no cycle
         assertFalse(graph1.detectCycle());
+    }
+
+    @Test
+    void findMinimumPath() {
+
+        LocationGraph graph = new LocationGraph();
+
+        graph.addLocation("A");
+        graph.addLocation("B");
+        graph.addLocation("C");
+        graph.addLocation("D");
+        graph.addLocation("E");
+        graph.addDistance("A", "B", 5.0);
+        graph.addDistance("B", "C", 10.0);
+        graph.addDistance("D", "C", 2.0);
+        Double expected1 = 5.0;
+        Double actual1 = graph.findMinimumPath("A", "B");
+        assertEquals(expected1, actual1);
+
+        // Test case 2: shortest path requires multiple connections
+        Double expected2 = 15.0;
+        Double actual2 = graph.findMinimumPath("A", "C");
+        assertEquals(expected2, actual2);
+
+        // Test case 3: no path from start to end
+        Double expected3 = -1.0;
+        Double actual3 = graph.findMinimumPath("A", "E");
+        assertEquals(expected3, actual3);
+
+        // Test case 4: start and end are the same location
+        Double expected4 = 0.0;
+        Double actual4 = graph.findMinimumPath("A", "A");
+        assertEquals(expected4, actual4);
+
+        // Test case 5: one location only
+        Double expected5 = -1.0;
+        Double actual5 = graph.findMinimumPath("A", "B");
+        assertEquals(expected5, actual5);
     }
 }

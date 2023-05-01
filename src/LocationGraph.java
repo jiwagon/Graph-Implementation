@@ -17,7 +17,7 @@ public class LocationGraph {
         return -1;
     }
 
-    // addLocation(String location):
+    // 1. addLocation(String location):
     // this should add the location if and only if the location does not already exist,
     // return a true if it is successful and false if it was not
     public boolean addLocation(String location) {
@@ -28,13 +28,12 @@ public class LocationGraph {
             this.locations.add(toAdd);
             return true;
         } else {
-            System.out.println("Location " + location + " already exists.");
+            //System.out.println("Location " + location + " already exists.");
         }
         return false;
     }
 
-
-    // addDistance(String locationA, String locationB, Double distance):
+    // 2. addDistance(String locationA, String locationB, Double distance):
     // this should add an edge between the two locations,
     // if one of the locations doesn't exist, then add the location,
     // return false if the edge already exists and true if it was successful
@@ -65,7 +64,7 @@ public class LocationGraph {
         for (int i = 0; i < start.distedges.size(); i++) {
             if (start.distedges.get(i).locationA.locationName == locationA &&
                     start.distedges.get(i).locationB.locationName == locationB) {
-                System.out.println("Distance already exists in Graph");
+                //System.out.println("Distance already exists in Graph");
                 return false;
             }
         }
@@ -75,6 +74,8 @@ public class LocationGraph {
         return true;
     }
 
+    // 3. findDistanceBreadthFirst(String locationA, String locationB):
+    // this should find the distance between the points using a breadth first algorithm
     public Double findDistanceBreadthFirst(String locationA, String locationB) {
         Queue<Location> searchQ = new LinkedList<>();
         ArrayList<Double> distances = new ArrayList<>();
@@ -113,6 +114,8 @@ public class LocationGraph {
         return -1.0;
     }
 
+    // 4. findDistanceDepthFirst(String locationA, String locationB):
+    // this should find the distance between the points using a depth first algorithm
     public Double findDistanceDepthFirst(String locationA, String locationB) {
         Stack<Location> searchStack = new Stack<>();
         ArrayList<Double> distances = new ArrayList<>();
@@ -154,37 +157,38 @@ public class LocationGraph {
     }
 
 
-    public Boolean detectCycle(){
+    // 5. detectCycle():
+    // return true if there is a cycle and false if there is no cycle
+    public Boolean detectCycle() {
         Queue<Location> queue = new LinkedList<>();
         ArrayList<Location> visited = new ArrayList<>();
         ArrayList<Location> parent = new ArrayList<>();
 
-        for (Location toCycle: this.locations){
-        //for (int i = 0; i < this.locations.size(); i++) {
+        for (Location toCycle : this.locations) {
             visited.add(toCycle);
             queue.add(toCycle);
             parent.add(null);
-            while(!queue.isEmpty()) {
+            while (!queue.isEmpty()) {
                 Location current = queue.remove();
                 //Location f_current = parent.remove();
                 Location f_current = parent.get(0);
                 parent.remove(0);
-                for(distanceEdge edge: current.distedges){
-                    if(edge.locationA == f_current){
+                for (distanceEdge edge : current.distedges) {
+                    if (edge.locationA == f_current) {
                         continue;
                     } else if (edge.locationB == f_current) {
                         continue;
                     }
-                    if(!visited.contains(edge.locationA)){
+                    if (!visited.contains(edge.locationA)) {
                         queue.add(edge.locationA);
                         visited.add(edge.locationA);
                         parent.add(current);
-                    } else if(!visited.contains(edge.locationB)){
+                    } else if (!visited.contains(edge.locationB)) {
                         queue.add(edge.locationB);
                         visited.add(edge.locationB);
                         parent.add(current);
                     } else {
-                        return true;
+                        return true; // return true if there is a cycle
                     }
                 }
             }
@@ -193,61 +197,85 @@ public class LocationGraph {
             visited.clear();
             parent.clear();
         }
-        return false;
+        return false; // return false if there is no cycle
     }
 
-//    public Boolean detectCycle(){
-//
-//        ArrayList<Location> visited = new ArrayList<>();
-//        Queue<Location> queue = new LinkedList<>();
-//        ArrayList<Location> parent = new ArrayList<>();
-//
-//        for (Location toCycle: this.locations){
-//            visited.add(toCycle);
-//            queue.add(toCycle);
-//            parent.add(toCycle);
-//            while(!queue.isEmpty()) {
-//                Location current = queue.remove();
-//                Location f_current = parent.remove();
-//                for(distanceEdge edge: current.distedges){
-//                    if(edge.locationA.getName().equals(f_current.getName())){
-//                        continue;
-//                    }
-//                    else if (edge.locationB.getName().equals(f_current.getName())) {
-//                        continue;
-//                    }
-//                    if(!visited.contains(edge.locationA)){
-//                        queue.add(edge.locationA);
-//                        visited.add(edge.locationA);
-//                        parent.add(current);
-//                    } else if(!visited.contains(edge.locationB)){
-//                        queue.add(edge.locationB);
-//                        visited.add(edge.locationB);
-//                        parent.add(current);
-//                    }else{
-//                        return true;
-//                    }
-//                }
-//            }
-//            //delete all the things in arraylist and queue
-//            queue.clear();
-//            visited.clear();
-//        }
-//        return false;
-//    }
-
-
+    // 6. toString(): should return a string of the adjacency graph representation of this graph,
+    // use the weight values to indicate that there is an edge and a -1 if there is no edge
     @Override
-    public String toString() {
-        StringBuilder stb = new StringBuilder();
-        for (int i = 0; i < this.locations.size(); i++) {
-            for (distanceEdge edge : this.locations.get(i).distedges) {
-                //stb = stb.append("[" + this.locations.get(i).locationName);
-                stb = stb.append("[" + edge.locationA.locationName
-                        + ", " + edge.locationB.locationName
-                        + ", " + edge.distance + "]; \n");
+    public String toString(){
+        StringBuilder str = new StringBuilder();
+        str.append("\t\t\t\t");
+        for(int x = 0; x < this.locations.size(); x++){
+            Location a = this.locations.get(x);
+            str.append(a.getName());
+            str.append("\t");
+        }
+        str.append("\n");
+        for(int x = 0; x < this.locations.size(); x++){
+            Location a = this.locations.get(x);
+            str.append(a.getName());
+            str.append("\t\t");
+            for(int y = 0; y < this.locations.size(); y++){
+                Location b = this.locations.get(y);
+                str.append(String.format(" %.2f",findDistanceBreadthFirst(a.getName(),b.getName())));
+                str.append("\t\t");
+                //str.append(String.format(" %.2f",findDistanceDepthFirst(a.getName(),b.getName())));
+            }
+            str.append('\n');
+        }
+        return str.toString();
+    }
+
+    // 7. (extra credit) findMinimumPath(String locationA, String locationB):
+    // this should return the minimum path between two points
+    public Double findMinimumPath(String locationA, String locationB) {
+        // Initialize distances and visited vertices
+        Map<Location, Double> distances = new HashMap<>();
+        Set<Location> visitedVertices = new HashSet<>();
+        for (Location location : locations) {
+            distances.put(location, Double.POSITIVE_INFINITY);
+        }
+
+        // Set distance of start vertex to 0
+        Location start = locations.get(getIndex(locationA));
+        distances.put(start, 0.0);
+
+        // Run Dijkstra's algorithm
+        while (!visitedVertices.containsAll(locations)) {
+            // Find vertex with minimum distance that hasn't been visited yet
+            Location current = null;
+            Double currentDistance = Double.POSITIVE_INFINITY;
+            for (Location location : locations) {
+                if (!visitedVertices.contains(location) && distances.get(location) < currentDistance) {
+                    current = location;
+                    currentDistance = distances.get(location);
+                }
+            }
+            if (current == null) {
+                // There is no path from start to end
+                return -1.0;
+            }
+
+            // Mark current vertex as visited
+            visitedVertices.add(current);
+
+            // Update distances of adjacent vertices
+            for (distanceEdge edge : current.distedges) {
+                Double newDistance = distances.get(current) + edge.distance;
+                if (newDistance < distances.get(edge.locationB)) {
+                    distances.put(edge.locationB, newDistance);
+                }
             }
         }
-        return stb.toString();
+
+        // Return distance of end vertex
+        Location end = locations.get(getIndex(locationB));
+        if (distances.get(end) == Double.POSITIVE_INFINITY) {
+            // There is no path from start to end
+            return -1.0;
+        } else {
+            return distances.get(end);
+        }
     }
 }
