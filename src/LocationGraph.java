@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Stack;
+import java.util.*;
 
 // Location = vertex
 public class LocationGraph {
@@ -86,7 +83,17 @@ public class LocationGraph {
         ArrayList<Double> distances = new ArrayList<>();
         ArrayList<Location> visitedVertices = new ArrayList<>();
 
+        if(Objects.equals(locationA, locationB)){
+            return -1.0;
+        }
+
         int index = this.getIndex(locationA);
+        int indexB = this.getIndex(locationB);
+
+        if (index ==-1 || indexB == -1) {
+            return -1.0;
+        }
+
         searchQ.add(this.locations.get(index));
         visitedVertices.add(this.locations.get(index));
         distances.add(0.0);
@@ -95,16 +102,9 @@ public class LocationGraph {
             Location current = searchQ.remove();
             int pos = visitedVertices.indexOf(current);
 
-            if(current.locationName.equals(locationA))
-                return distances.get(pos);
+//            if(current.locationName.equals(locationA))
+//                return distances.get(pos);
 
-            for(distanceEdge edge: current.distedges){
-                if(!visitedVertices.contains(edge.locationA)){
-                    searchQ.add(edge.locationA);
-                    visitedVertices.add(edge.locationA);
-                    distances.add(distances.get(pos)+ edge.distance);
-                }
-            }
             if (current.locationName.equals(locationB))
                 return distances.get(pos);
 
@@ -138,11 +138,12 @@ public class LocationGraph {
 
             for(distanceEdge edge: current.distedges){
                 if(!visited.contains(edge.locationB)){
-                    stack.push(edge.locationA);
+                    stack.push(edge.locationB);
                     visited.add(edge.locationB);
                     Double new_dis = 0.0;
                     new_dis = curr_dis + edge.distance;
                     distance.add(new_dis);
+
                 }
             }
 

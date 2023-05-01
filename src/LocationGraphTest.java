@@ -20,7 +20,7 @@ class LocationGraphTest {
         assertFalse(graph.addLocation("Philadelphia"));
         // Test case 2: adding a new location, return true
         assertTrue(graph.addLocation("Pittsburgh"));
-        assertTrue(graph.addLocation("Fort Lauderdale"));
+        assertTrue(graph.addLocation("San Francisco"));
     }
 
     @Test
@@ -57,13 +57,17 @@ class LocationGraphTest {
         graph.addDistance("New York", "Philadelphia", 100.0);
         graph.addDistance("New York", "San Diego", 500.0);
         graph.addDistance("Philadelphia", "State College", 50.0);
-        //Double result = 50.0;
-        //Double result2 = -1.0;
-        //return distance if there is a distance between two locations
-        //assertEquals(result, graph.findDistanceBreadthFirst("New York","State College"));
-        //return -1.0 if there is no distance between two locations
-        //assertEquals(result2, graph.findDistanceBreadthFirst("San Diego","State College"));
-        //return -1.0 if either location does not exist
-        //assertEquals(result2, graph.findDistanceBreadthFirst("Miami","State College"));
+
+        Double result = 150.0;
+        Double result2 = -1.0;
+        // return distance if there is a distance between two locations
+        assertEquals(result, graph.findDistanceBreadthFirst("New York","State College"));
+        // return -1.0 if there is no distance between two locations
+        assertEquals(650.0, graph.findDistanceBreadthFirst("San Diego","State College"));
+        // return -1.0 if either location does not exist
+        assertEquals(-1.0, graph.findDistanceBreadthFirst("Miami","State College"));
+        assertEquals(-1.0, graph.findDistanceBreadthFirst("New York","Boston"));
+        assertEquals(-1.0, graph.findDistanceBreadthFirst("New York","Boston"));
+        assertEquals(-1.0, graph.findDistanceBreadthFirst("Boston","Los Angeles"));
     }
 }
