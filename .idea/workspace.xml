@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a2ced007-bba8-4c98-b38f-fa31b5a723f1" name="Changes" comment="successful findDistanceBreadthFirst method test cases">
+    <list default="true" id="a2ced007-bba8-4c98-b38f-fa31b5a723f1" name="Changes" comment="updated findDistanceBreadthFirst method test cases">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/LocationGraph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/LocationGraph.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/LocationGraphTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/LocationGraphTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -62,29 +63,22 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.LocationGraphTest.findDistanceBreadthFirst">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Main" />
-      <module name="Pa04-Graph" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="LocationGraphTest.addDistance" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Pa04-Graph" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="LocationGraphTest" />
-      <option name="METHOD_NAME" value="addDistance" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="JUnit.LocationGraphTest.detectCycle">
     <configuration name="LocationGraphTest.addLocation" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Pa04-Graph" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="LocationGraphTest" />
       <option name="METHOD_NAME" value="addLocation" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="LocationGraphTest.detectCycle" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Pa04-Graph" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="LocationGraphTest" />
+      <option name="METHOD_NAME" value="detectCycle" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -100,12 +94,33 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="LocationGraphTest.findDistanceDepthFirst" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Pa04-Graph" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="LocationGraphTest" />
+      <option name="METHOD_NAME" value="findDistanceDepthFirst" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="LocationGraphTest.testFindDistanceDepthFirst" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Pa04-Graph" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="LocationGraphTest" />
+      <option name="METHOD_NAME" value="testFindDistanceDepthFirst" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.LocationGraphTest.detectCycle" />
         <item itemvalue="JUnit.LocationGraphTest.findDistanceBreadthFirst" />
+        <item itemvalue="JUnit.LocationGraphTest.testFindDistanceDepthFirst" />
+        <item itemvalue="JUnit.LocationGraphTest.findDistanceDepthFirst" />
         <item itemvalue="JUnit.LocationGraphTest.addLocation" />
-        <item itemvalue="JUnit.LocationGraphTest.addDistance" />
-        <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
   </component>
@@ -120,7 +135,7 @@
       <workItem from="1682342512589" duration="5575000" />
       <workItem from="1682516731807" duration="818000" />
       <workItem from="1682710499058" duration="1807000" />
-      <workItem from="1682915321665" duration="2286000" />
+      <workItem from="1682915321665" duration="12234000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commits">
       <created>1682398918236</created>
@@ -164,7 +179,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682916857493</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="updated findDistanceBreadthFirst method test cases">
+      <created>1682917793602</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1682917793602</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -188,6 +210,7 @@
     <MESSAGE value="Successful addDistance() test cases" />
     <MESSAGE value="updated addDistance() test" />
     <MESSAGE value="successful findDistanceBreadthFirst method test cases" />
-    <option name="LAST_COMMIT_MESSAGE" value="successful findDistanceBreadthFirst method test cases" />
+    <MESSAGE value="updated findDistanceBreadthFirst method test cases" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated findDistanceBreadthFirst method test cases" />
   </component>
 </project>

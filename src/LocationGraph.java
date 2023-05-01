@@ -27,8 +27,7 @@ public class LocationGraph {
         if (getIndex(location) == -1) {
             this.locations.add(toAdd);
             return true;
-        }
-        else {
+        } else {
             System.out.println("Location " + location + " already exists.");
         }
         return false;
@@ -48,8 +47,7 @@ public class LocationGraph {
             this.addLocation(locationA);
             start = this.locations.get(this.getIndex(locationA));
 
-        }
-        else {
+        } else {
             start = this.locations.get(startPos);
         }
         // check if end vertex exists or not
@@ -57,19 +55,18 @@ public class LocationGraph {
         if (endPos < 0) {
             this.addLocation(locationB);
             end = this.locations.get(this.getIndex(locationB));
-        }
-        else {
+        } else {
             end = this.locations.get(endPos);
         }
 
-        distanceEdge toAddStart = new distanceEdge(start, end,distance);
+        distanceEdge toAddStart = new distanceEdge(start, end, distance);
         distanceEdge toAddEnd = new distanceEdge(end, start, distance);
 
         for (int i = 0; i < start.distedges.size(); i++) {
             if (start.distedges.get(i).locationA.locationName == locationA &&
                     start.distedges.get(i).locationB.locationName == locationB) {
-                    System.out.println("Distance already exists in Graph");
-                    return false;
+                System.out.println("Distance already exists in Graph");
+                return false;
             }
         }
 
@@ -78,19 +75,19 @@ public class LocationGraph {
         return true;
     }
 
-    public Double findDistanceBreadthFirst(String locationA, String locationB){
+    public Double findDistanceBreadthFirst(String locationA, String locationB) {
         Queue<Location> searchQ = new LinkedList<>();
         ArrayList<Double> distances = new ArrayList<>();
         ArrayList<Location> visitedVertices = new ArrayList<>();
 
-        if(Objects.equals(locationA, locationB)){
+        if (Objects.equals(locationA, locationB)) {
             return -1.0;
         }
 
         int index = this.getIndex(locationA);
         int indexB = this.getIndex(locationB);
 
-        if (index ==-1 || indexB == -1) {
+        if (index == -1 || indexB == -1) {
             return -1.0;
         }
 
@@ -98,92 +95,153 @@ public class LocationGraph {
         visitedVertices.add(this.locations.get(index));
         distances.add(0.0);
 
-        while(!searchQ.isEmpty()){
+        while (!searchQ.isEmpty()) {
             Location current = searchQ.remove();
             int pos = visitedVertices.indexOf(current);
 
             if (current.locationName.equals(locationB))
                 return distances.get(pos);
 
-            for(distanceEdge edge: current.distedges) {
-                if(!visitedVertices.contains(edge.locationB)) {
+            for (distanceEdge edge : current.distedges) {
+                if (!visitedVertices.contains(edge.locationB)) {
                     searchQ.add(edge.locationB);
                     visitedVertices.add(edge.locationB);
-                    distances.add(distances.get(pos)+ edge.distance);
+                    distances.add(distances.get(pos) + edge.distance);
                 }
             }
         }
         return -1.0;
     }
 
-    public Double findDistanceDepthFirst(String locationA, String locationB){
-        ArrayList<Location> visited = new ArrayList<>();
-        Stack<Location> stack = new Stack();
-        Stack<Double> distance = new Stack();
+    public Double findDistanceDepthFirst(String locationA, String locationB) {
+        Stack<Location> searchStack = new Stack<>();
+        ArrayList<Double> distances = new ArrayList<>();
+        ArrayList<Location> visitedVertices = new ArrayList<>();
+
+        if (Objects.equals(locationA, locationB)) {
+            return -1.0;
+        }
 
         int index = this.getIndex(locationA);
-        stack.push(this.locations.get(index));
-        visited.add(this.locations.get(index));
-        distance.add(0.0);
+        int indexB = this.getIndex(locationB);
 
-        while(!stack.isEmpty()){
-            Location current = stack.pop();
-            Double curr_dis = distance.pop();
-            if(current.locationName.equals(locationB)){
-                return curr_dis;
+        if (index == -1 || indexB == -1) {
+            return -1.0;
+        }
+
+        searchStack.push(this.locations.get(index));
+        visitedVertices.add(this.locations.get(index));
+        distances.add(0.0);
+
+        while (!searchStack.isEmpty()) {
+            Location current = searchStack.pop();
+            int pos = visitedVertices.indexOf(current);
+
+            if (current.locationName.equals(locationB)) {
+                return distances.get(pos);
             }
 
-            for(distanceEdge edge: current.distedges){
-                if(!visited.contains(edge.locationB)){
-                    stack.push(edge.locationB);
-                    visited.add(edge.locationB);
-                    Double new_dis = 0.0;
-                    new_dis = curr_dis + edge.distance;
-                    distance.add(new_dis);
-
+            for (distanceEdge edge : current.distedges) {
+                if (!visitedVertices.contains(edge.locationB)) {
+                    searchStack.push(edge.locationB);
+                    visitedVertices.add(edge.locationB);
+                    distances.add(distances.get(pos) + edge.distance);
                 }
             }
-
         }
+
         return -1.0;
     }
 
+
     public Boolean detectCycle(){
-        ArrayList<Location> visited = new ArrayList<>();
         Queue<Location> queue = new LinkedList<>();
-        Queue<Location> parent = new LinkedList<>();
+        ArrayList<Location> visited = new ArrayList<>();
+        ArrayList<Location> parent = new ArrayList<>();
+
         for (Location toCycle: this.locations){
+        //for (int i = 0; i < this.locations.size(); i++) {
             visited.add(toCycle);
             queue.add(toCycle);
-            parent.add(toCycle);
+            parent.add(null);
             while(!queue.isEmpty()) {
                 Location current = queue.remove();
-                Location f_current = parent.remove();
+                //Location f_current = parent.remove();
+                Location f_current = parent.get(0);
+                parent.remove(0);
                 for(distanceEdge edge: current.distedges){
-                    if(edge.locationA.getName().equals(f_current.getName())){
+                    if(edge.locationA == f_current){
+                        continue;
+                    } else if (edge.locationB == f_current) {
                         continue;
                     }
-                    if(!visited.contains(edge.locationB)){
+                    if(!visited.contains(edge.locationA)){
                         queue.add(edge.locationA);
+                        visited.add(edge.locationA);
+                        parent.add(current);
+                    } else if(!visited.contains(edge.locationB)){
+                        queue.add(edge.locationB);
                         visited.add(edge.locationB);
                         parent.add(current);
-                    }else{
+                    } else {
                         return true;
                     }
                 }
             }
-            //delete all the things in arraylist and queue
+            // delete all the things in arraylist and queue
             queue.clear();
             visited.clear();
+            parent.clear();
         }
         return false;
     }
+
+//    public Boolean detectCycle(){
+//
+//        ArrayList<Location> visited = new ArrayList<>();
+//        Queue<Location> queue = new LinkedList<>();
+//        ArrayList<Location> parent = new ArrayList<>();
+//
+//        for (Location toCycle: this.locations){
+//            visited.add(toCycle);
+//            queue.add(toCycle);
+//            parent.add(toCycle);
+//            while(!queue.isEmpty()) {
+//                Location current = queue.remove();
+//                Location f_current = parent.remove();
+//                for(distanceEdge edge: current.distedges){
+//                    if(edge.locationA.getName().equals(f_current.getName())){
+//                        continue;
+//                    }
+//                    else if (edge.locationB.getName().equals(f_current.getName())) {
+//                        continue;
+//                    }
+//                    if(!visited.contains(edge.locationA)){
+//                        queue.add(edge.locationA);
+//                        visited.add(edge.locationA);
+//                        parent.add(current);
+//                    } else if(!visited.contains(edge.locationB)){
+//                        queue.add(edge.locationB);
+//                        visited.add(edge.locationB);
+//                        parent.add(current);
+//                    }else{
+//                        return true;
+//                    }
+//                }
+//            }
+//            //delete all the things in arraylist and queue
+//            queue.clear();
+//            visited.clear();
+//        }
+//        return false;
+//    }
+
 
     @Override
     public String toString() {
         StringBuilder stb = new StringBuilder();
         for (int i = 0; i < this.locations.size(); i++) {
-            for (distanceEdge edge: this.locations.get(i).distedges) {
+            for (distanceEdge edge : this.locations.get(i).distedges) {
                 //stb = stb.append("[" + this.locations.get(i).locationName);
                 stb = stb.append("[" + edge.locationA.locationName
                         + ", " + edge.locationB.locationName
@@ -192,27 +250,4 @@ public class LocationGraph {
         }
         return stb.toString();
     }
-    //    @Override
-//    public String toString(){
-//        StringBuilder str = new StringBuilder();
-//        str.append("\t");
-//        for(int x = 0; x < this.vertices.size(); x++){
-//            Vertex a = this.vertices.get(x);
-//            str.append(a.getName());
-//            str.append("\t");
-//        }
-//        str.append("\n");
-//        for(int x = 0; x < this.vertices.size(); x++){
-//            Vertex a = this.vertices.get(x);
-//            str.append(a.getName());
-//            str.append("\t");
-//            for(int y = 0; y < this.vertices.size(); y++){
-//                Vertex b = this.vertices.get(y);
-//                str.append(String.format(" %.2f",findDistanceBreadthFirst(a.getName(),b.getName())));
-//                str.append("\t");
-//            }
-//            str.append('\n');
-//        }
-//        return str.toString();
-//    }
 }
