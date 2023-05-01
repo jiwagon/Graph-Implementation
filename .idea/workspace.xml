@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a2ced007-bba8-4c98-b38f-fa31b5a723f1" name="Changes" comment="added findDDF and DetectCycle methods">
+    <list default="true" id="a2ced007-bba8-4c98-b38f-fa31b5a723f1" name="Changes" comment="updated successful addLocation() method">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/LocationGraph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/LocationGraph.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/LocationGraphTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/LocationGraphTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/distanceEdge.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/distanceEdge.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,10 +64,20 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.LocationGraphTest.addLocation">
+  <component name="RunManager" selected="JUnit.LocationGraphTest.addDistance">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="Pa04-Graph" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="LocationGraphTest.addDistance" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Pa04-Graph" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="LocationGraphTest" />
+      <option name="METHOD_NAME" value="addDistance" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -83,6 +94,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.LocationGraphTest.addDistance" />
         <item itemvalue="JUnit.LocationGraphTest.addLocation" />
         <item itemvalue="Application.Main" />
       </list>
@@ -114,7 +126,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682902378515</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="updated successful addLocation() method">
+      <created>1682903476735</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1682903476735</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -134,17 +153,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Initial Commits" />
     <MESSAGE value="added findDDF and DetectCycle methods" />
-    <option name="LAST_COMMIT_MESSAGE" value="added findDDF and DetectCycle methods" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/LocationGraphTest.java</url>
-          <line>15</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="updated successful addLocation() method" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated successful addLocation() method" />
   </component>
 </project>

@@ -61,12 +61,15 @@ public class LocationGraph {
             end = this.locations.get(endPos);
         }
 
+        distanceEdge toAddStart = new distanceEdge(start, end,distance);
+        //distanceEdge toAddEnd = new distanceEdge(end, start, distance);
+
         for (int i = 0; i < start.distedges.size(); i++) {
             if (start.distedges.get(i).locationB.locationName == locationB) {
                     System.out.println("End Edge already exists in Graph");
                     return false;
-                }
             }
+        }
 
         for (int i = 0; i < start.distedges.size(); i++) {
             if (end.distedges.get(i).locationA.locationName.equals(locationA)) {
@@ -75,10 +78,14 @@ public class LocationGraph {
             }
         }
 
-        // Add same edge from end to start
-        start.distedges.add(new distanceEdge(start, end, distance));
-        end.distedges.add(new distanceEdge(end, start, distance));
+        start.distedges.add(toAddStart);
+        //end.distedges.add(toAddEnd);
         return true;
+
+        // Add same edge from end to start
+        //start.distedges.add(new distanceEdge(start, end, distance));
+        //end.distedges.add(new distanceEdge(end, start, distance));
+        //return true;
         // add vertex to startVertex arraylist of edges if edge with endVertex is not existing
         // add vertex to endVertex arraylist of edges if edge with startVertex is not existing
     }
@@ -178,12 +185,11 @@ public class LocationGraph {
         StringBuilder stb = new StringBuilder();
         for (int i = 0; i < this.locations.size(); i++) {
             for (distanceEdge edge: this.locations.get(i).distedges) {
-                stb = stb.append("[" + this.locations.get(i).locationName);
-                stb = stb.append(", " + edge.locationA.locationName);
-                stb = stb.append(", " + edge.locationB.locationName);
-                stb = stb.append(", " + edge.distance + "]; ");
+                //stb = stb.append("[" + this.locations.get(i).locationName);
+                stb = stb.append("[" + edge.locationA.locationName
+                        + ", " + edge.locationB.locationName
+                        + ", " + edge.distance + "]; \n");
             }
-            stb.append("\n");
         }
         return stb.toString();
     }

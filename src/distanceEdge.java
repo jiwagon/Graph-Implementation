@@ -13,8 +13,8 @@ public class distanceEdge {
         this.distance = distance; // weight
     }
 
-    @Override
-    public String toString() {
-        return "[" + locationA.locationName + ", " + locationB.locationName + ", " + distance + "]";
-    }
+//    @Override
+//    public String toString() {
+//        return "[" + locationA.locationName + ", " + locationB.locationName + ", " + distance + "]";
+//    }
 }
