@@ -102,9 +102,6 @@ public class LocationGraph {
             Location current = searchQ.remove();
             int pos = visitedVertices.indexOf(current);
 
-//            if(current.locationName.equals(locationA))
-//                return distances.get(pos);
-
             if (current.locationName.equals(locationB))
                 return distances.get(pos);
 

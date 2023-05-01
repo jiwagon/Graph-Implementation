@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a2ced007-bba8-4c98-b38f-fa31b5a723f1" name="Changes" comment="updated addDistance() test">
+    <list default="true" id="a2ced007-bba8-4c98-b38f-fa31b5a723f1" name="Changes" comment="successful findDistanceBreadthFirst method test cases">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/LocationGraph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/LocationGraph.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/LocationGraphTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/LocationGraphTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -121,7 +120,7 @@
       <workItem from="1682342512589" duration="5575000" />
       <workItem from="1682516731807" duration="818000" />
       <workItem from="1682710499058" duration="1807000" />
-      <workItem from="1682915321665" duration="1317000" />
+      <workItem from="1682915321665" duration="2286000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commits">
       <created>1682398918236</created>
@@ -158,7 +157,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682908584137</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="successful findDistanceBreadthFirst method test cases">
+      <created>1682916857493</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1682916857493</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -181,6 +187,7 @@
     <MESSAGE value="updated successful addLocation() method" />
     <MESSAGE value="Successful addDistance() test cases" />
     <MESSAGE value="updated addDistance() test" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated addDistance() test" />
+    <MESSAGE value="successful findDistanceBreadthFirst method test cases" />
+    <option name="LAST_COMMIT_MESSAGE" value="successful findDistanceBreadthFirst method test cases" />
   </component>
 </project>
