@@ -38,6 +38,10 @@ public class LocationGraph {
     }
 
 
+    // addDistance(String locationA, String locationB, Double distance):
+    // this should add an edge between the two locations,
+    // if one of the locations doesn't exist, then add the location,
+    // return false if the edge already exists and true if it was successful
     public boolean addDistance(String locationA, String locationB, Double distance) {
         Location start;
         Location end;
@@ -62,32 +66,19 @@ public class LocationGraph {
         }
 
         distanceEdge toAddStart = new distanceEdge(start, end,distance);
-        //distanceEdge toAddEnd = new distanceEdge(end, start, distance);
+        distanceEdge toAddEnd = new distanceEdge(end, start, distance);
 
         for (int i = 0; i < start.distedges.size(); i++) {
-            if (start.distedges.get(i).locationB.locationName == locationB) {
-                    System.out.println("End Edge already exists in Graph");
+            if (start.distedges.get(i).locationA.locationName == locationA &&
+                    start.distedges.get(i).locationB.locationName == locationB) {
+                    System.out.println("Distance already exists in Graph");
                     return false;
             }
         }
 
-        for (int i = 0; i < start.distedges.size(); i++) {
-            if (end.distedges.get(i).locationA.locationName.equals(locationA)) {
-                System.out.println("Start Edge already exists in Graph");
-                return false;
-            }
-        }
-
         start.distedges.add(toAddStart);
-        //end.distedges.add(toAddEnd);
+        end.distedges.add(toAddEnd);
         return true;
-
-        // Add same edge from end to start
-        //start.distedges.add(new distanceEdge(start, end, distance));
-        //end.distedges.add(new distanceEdge(end, start, distance));
-        //return true;
-        // add vertex to startVertex arraylist of edges if edge with endVertex is not existing
-        // add vertex to endVertex arraylist of edges if edge with startVertex is not existing
     }
 
     public Double findDistanceBreadthFirst(String locationA, String locationB){
@@ -103,15 +94,25 @@ public class LocationGraph {
         while(!searchQ.isEmpty()){
             Location current = searchQ.remove();
             int pos = visitedVertices.indexOf(current);
-            if(current.locationName.equals(locationB))
+
+            if(current.locationName.equals(locationA))
                 return distances.get(pos);
 
             for(distanceEdge edge: current.distedges){
-                if(!visitedVertices.contains(edge.locationB)){
+                if(!visitedVertices.contains(edge.locationA)){
                     searchQ.add(edge.locationA);
+                    visitedVertices.add(edge.locationA);
+                    distances.add(distances.get(pos)+ edge.distance);
+                }
+            }
+            if (current.locationName.equals(locationB))
+                return distances.get(pos);
+
+            for(distanceEdge edge: current.distedges) {
+                if(!visitedVertices.contains(edge.locationB)) {
+                    searchQ.add(edge.locationB);
                     visitedVertices.add(edge.locationB);
                     distances.add(distances.get(pos)+ edge.distance);
-                    //dist = dist + edge.weight;
                 }
             }
         }
