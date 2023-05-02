@@ -4,6 +4,7 @@ import java.util.*;
 public class LocationGraph {
 
     ArrayList<Location> locations;
+    ArrayList<Location> path;
 
     public LocationGraph() {
         this.locations = new ArrayList<Location>();
@@ -203,79 +204,110 @@ public class LocationGraph {
     // 6. toString(): should return a string of the adjacency graph representation of this graph,
     // use the weight values to indicate that there is an edge and a -1 if there is no edge
     @Override
-    public String toString(){
+    public String toString() {
         StringBuilder str = new StringBuilder();
         str.append("\t\t\t\t");
-        for(int x = 0; x < this.locations.size(); x++){
+        for (int x = 0; x < this.locations.size(); x++) {
             Location a = this.locations.get(x);
             str.append(a.getName());
             str.append("\t");
         }
         str.append("\n");
-        for(int x = 0; x < this.locations.size(); x++){
+        for (int x = 0; x < this.locations.size(); x++) {
             Location a = this.locations.get(x);
             str.append(a.getName());
             str.append("\t\t");
-            for(int y = 0; y < this.locations.size(); y++){
+            for (int y = 0; y < this.locations.size(); y++) {
                 Location b = this.locations.get(y);
-                str.append(String.format(" %.2f",findDistanceBreadthFirst(a.getName(),b.getName())));
+                str.append(String.format(" %.2f", findDistanceBreadthFirst(a.getName(), b.getName())));
                 str.append("\t\t");
                 //str.append(String.format(" %.2f",findDistanceDepthFirst(a.getName(),b.getName())));
             }
             str.append('\n');
         }
+//        for (int x = 0; x < this.locations.size(); x++) {
+//            Location a = this.locations.get(x);
+//            str.append(a.getName());
+//            str.append("\t\t");
+//        }
         return str.toString();
     }
 
-    // 7. (extra credit) findMinimumPath(String locationA, String locationB):
-    // this should return the minimum path between two points
-    public Double findMinimumPath(String locationA, String locationB) {
-        // Initialize distances and visited vertices
-        Map<Location, Double> distances = new HashMap<>();
-        Set<Location> visitedVertices = new HashSet<>();
-        for (Location location : locations) {
-            distances.put(location, Double.POSITIVE_INFINITY);
-        }
-
-        // Set distance of start vertex to 0
-        Location start = locations.get(getIndex(locationA));
-        distances.put(start, 0.0);
-
-        // Run Dijkstra's algorithm
-        while (!visitedVertices.containsAll(locations)) {
-            // Find vertex with minimum distance that hasn't been visited yet
-            Location current = null;
-            Double currentDistance = Double.POSITIVE_INFINITY;
-            for (Location location : locations) {
-                if (!visitedVertices.contains(location) && distances.get(location) < currentDistance) {
-                    current = location;
-                    currentDistance = distances.get(location);
-                }
-            }
-            if (current == null) {
-                // There is no path from start to end
-                return -1.0;
-            }
-
-            // Mark current vertex as visited
-            visitedVertices.add(current);
-
-            // Update distances of adjacent vertices
+    private double getTotalDistance(ArrayList<Location> path) {
+        double distance = 0.0;
+        for (int i = 0; i < path.size() - 1; i++) {
+            Location current = path.get(i);
+            Location next = path.get(i + 1);
             for (distanceEdge edge : current.distedges) {
-                Double newDistance = distances.get(current) + edge.distance;
-                if (newDistance < distances.get(edge.locationB)) {
-                    distances.put(edge.locationB, newDistance);
+                if (edge.locationB.equals(next)) {
+                    distance += edge.distance;
+                    break;
                 }
             }
         }
+        return distance;
+    }
 
-        // Return distance of end vertex
-        Location end = locations.get(getIndex(locationB));
-        if (distances.get(end) == Double.POSITIVE_INFINITY) {
-            // There is no path from start to end
-            return -1.0;
-        } else {
-            return distances.get(end);
+    public ArrayList<Location> findMinimumPath (String locationA, String locationB){
+        Queue<Location> queue = new LinkedList<>();
+        ArrayList<Double> distances = new ArrayList<>(this.locations.size());
+        ArrayList<Location> parents = new ArrayList<>(this.locations.size());
+
+        Location start = this.locations.get(this.getIndex(locationA));
+        Location end = this.locations.get(this.getIndex(locationB));
+        if (start == null || end == null) {
+            return null; // one of the locations doesn't exist
         }
+
+        for (int i = 0; i < this.locations.size(); i++) {
+            if (this.locations.get(i).equals(start)) {
+                distances.add(0.0);
+            } else {
+                distances.add(Double.POSITIVE_INFINITY);
+            }
+            parents.add(null);
+        }
+
+        queue.offer(start);
+
+        while (!queue.isEmpty()) {
+            Location current = queue.poll();
+            if (current.equals(end)) {
+                break;
+            }
+
+            for (distanceEdge edge : current.distedges) {
+                Location neighbor = edge.locationB;
+                double newDistance = distances.get(this.locations.indexOf(current)) + edge.distance;
+                if (newDistance < distances.get(this.locations.indexOf(neighbor))) {
+                    distances.set(this.locations.indexOf(neighbor), newDistance);
+                    parents.set(this.locations.indexOf(neighbor), current);
+                    queue.offer(neighbor);
+                }
+            }
+        }
+        ArrayList<Location> path = new ArrayList<>();
+        Location current = end;
+        while (current != null) {
+            path.add(current);
+            current = parents.get(this.locations.indexOf(current));
+        }
+        Collections.reverse(path);
+        if (path == null || path.size() == 0) {
+            System.out.println("No path found.");
+        } else {
+            for (int i = 0; i < path.size(); i++) {
+                System.out.print(path.get(i).getName());
+                if (i < path.size() - 1) {
+                    System.out.print(" -> ");
+                }
+            }
+            System.out.println("\nTotal distance: ");
+            System.out.println(getTotalDistance(path));
+            System.out.println("\n");
+        }
+
+        return path;
     }
 }
+

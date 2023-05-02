@@ -1,5 +1,7 @@
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class LocationGraphTest {
@@ -130,37 +132,40 @@ class LocationGraphTest {
     void findMinimumPath() {
 
         LocationGraph graph = new LocationGraph();
-
         graph.addLocation("A");
         graph.addLocation("B");
         graph.addLocation("C");
         graph.addLocation("D");
         graph.addLocation("E");
         graph.addDistance("A", "B", 5.0);
-        graph.addDistance("B", "C", 10.0);
-        graph.addDistance("D", "C", 2.0);
-        Double expected1 = 5.0;
-        Double actual1 = graph.findMinimumPath("A", "B");
-        assertEquals(expected1, actual1);
+        graph.addDistance("B", "C", 18.0);
+        graph.addDistance("A", "D", 15.0);
+        graph.addDistance("D", "C", 20.0);
+        graph.addDistance("E", "D", 12.0);
 
-        // Test case 2: shortest path requires multiple connections
-        Double expected2 = 15.0;
-        Double actual2 = graph.findMinimumPath("A", "C");
-        assertEquals(expected2, actual2);
+        // test the findMinimumPath method
+        ArrayList<Location> path = graph.findMinimumPath("A", "C");
+        assertNotNull(path);
+        assertEquals(3, path.size());
+        assertEquals("A", path.get(0).getName());
+        assertEquals("B", path.get(1).getName());
+        assertEquals("C", path.get(2).getName());
 
-        // Test case 3: no path from start to end
-        Double expected3 = -1.0;
-        Double actual3 = graph.findMinimumPath("A", "E");
-        assertEquals(expected3, actual3);
+        // Longer path would be
+        ArrayList<Location> path1 = graph.findMinimumPath("A", "E");
+        assertNotNull(path);
+        assertEquals(3, path1.size());
+        assertEquals("A", path1.get(0).getName());
+        assertEquals("D", path1.get(1).getName());
+        assertEquals("E", path1.get(2).getName());
 
-        // Test case 4: start and end are the same location
-        Double expected4 = 0.0;
-        Double actual4 = graph.findMinimumPath("A", "A");
-        assertEquals(expected4, actual4);
-
-        // Test case 5: one location only
-        Double expected5 = -1.0;
-        Double actual5 = graph.findMinimumPath("A", "B");
-        assertEquals(expected5, actual5);
+        // Longer path would be B -> C -> D -> E = 18 + 12 + 20 = 50
+        ArrayList<Location> path2 = graph.findMinimumPath("B", "E");
+        assertNotNull(path);
+        assertEquals(4, path2.size());
+        assertEquals("B", path2.get(0).getName());
+        assertEquals("A", path2.get(1).getName());
+        assertEquals("D", path2.get(2).getName());
+        assertEquals("E", path2.get(3).getName());
     }
 }
