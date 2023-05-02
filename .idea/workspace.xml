@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a2ced007-bba8-4c98-b38f-fa31b5a723f1" name="Changes" comment="successful detectCycle method">
+    <list default="true" id="a2ced007-bba8-4c98-b38f-fa31b5a723f1" name="Changes" comment="successful findMinimumPath method">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/LocationGraph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/LocationGraph.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/LocationGraphTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/LocationGraphTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -65,7 +64,7 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.LocationGraphTest.findMinimumPath">
+  <component name="RunManager" selected="JUnit.LocationGraphTest">
     <configuration name="LocationGraphTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Pa04-Graph" />
       <option name="PACKAGE_NAME" value="" />
@@ -117,8 +116,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.LocationGraphTest.findMinimumPath" />
         <item itemvalue="JUnit.LocationGraphTest" />
+        <item itemvalue="JUnit.LocationGraphTest.findMinimumPath" />
         <item itemvalue="JUnit.LocationGraphTest.findDistanceBreadthFirst" />
         <item itemvalue="JUnit.LocationGraphTest.addDistance" />
         <item itemvalue="JUnit.LocationGraphTest.detectCycle" />
@@ -137,7 +136,7 @@
       <workItem from="1682516731807" duration="818000" />
       <workItem from="1682710499058" duration="1807000" />
       <workItem from="1682915321665" duration="19559000" />
-      <workItem from="1682953458073" duration="11376000" />
+      <workItem from="1682953458073" duration="12038000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commits">
       <created>1682398918236</created>
@@ -202,7 +201,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682937281776</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="successful findMinimumPath method">
+      <created>1682989759473</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1682989759473</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -229,6 +235,7 @@
     <MESSAGE value="updated findDistanceBreadthFirst method test cases" />
     <MESSAGE value="updated detectCycle() method test cases" />
     <MESSAGE value="successful detectCycle method" />
-    <option name="LAST_COMMIT_MESSAGE" value="successful detectCycle method" />
+    <MESSAGE value="successful findMinimumPath method" />
+    <option name="LAST_COMMIT_MESSAGE" value="successful findMinimumPath method" />
   </component>
 </project>

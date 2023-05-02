@@ -130,8 +130,8 @@ class LocationGraphTest {
 
     @Test
     void findMinimumPath() {
-
         LocationGraph graph = new LocationGraph();
+
         graph.addLocation("A");
         graph.addLocation("B");
         graph.addLocation("C");
@@ -143,7 +143,8 @@ class LocationGraphTest {
         graph.addDistance("D", "C", 20.0);
         graph.addDistance("E", "D", 12.0);
 
-        // test the findMinimumPath method
+        // Longer path would be A -> D -> C = 15 + 20 = 35
+        // Shortest path = 23
         ArrayList<Location> path = graph.findMinimumPath("A", "C");
         assertNotNull(path);
         assertEquals(3, path.size());
@@ -151,7 +152,8 @@ class LocationGraphTest {
         assertEquals("B", path.get(1).getName());
         assertEquals("C", path.get(2).getName());
 
-        // Longer path would be
+        // Longer path would be A -> B -> C -> D -> E = 5 + 18 + 20 + 12 = 55
+        // Shortest path = 27
         ArrayList<Location> path1 = graph.findMinimumPath("A", "E");
         assertNotNull(path);
         assertEquals(3, path1.size());
@@ -160,6 +162,7 @@ class LocationGraphTest {
         assertEquals("E", path1.get(2).getName());
 
         // Longer path would be B -> C -> D -> E = 18 + 12 + 20 = 50
+        // Shortest path = 32
         ArrayList<Location> path2 = graph.findMinimumPath("B", "E");
         assertNotNull(path);
         assertEquals(4, path2.size());

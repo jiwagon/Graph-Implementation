@@ -225,11 +225,6 @@ public class LocationGraph {
             }
             str.append('\n');
         }
-//        for (int x = 0; x < this.locations.size(); x++) {
-//            Location a = this.locations.get(x);
-//            str.append(a.getName());
-//            str.append("\t\t");
-//        }
         return str.toString();
     }
 
@@ -248,6 +243,8 @@ public class LocationGraph {
         return distance;
     }
 
+    // 7. (extra credit) findMinimumPath(String locationA, String locationB):
+    // this should return the minimum path between two points
     public ArrayList<Location> findMinimumPath (String locationA, String locationB){
         Queue<Location> queue = new LinkedList<>();
         ArrayList<Double> distances = new ArrayList<>(this.locations.size());
@@ -256,7 +253,8 @@ public class LocationGraph {
         Location start = this.locations.get(this.getIndex(locationA));
         Location end = this.locations.get(this.getIndex(locationB));
         if (start == null || end == null) {
-            return null; // one of the locations doesn't exist
+            // return null if one of the locations doesn't exist
+            return null;
         }
 
         for (int i = 0; i < this.locations.size(); i++) {
@@ -306,8 +304,6 @@ public class LocationGraph {
             System.out.println(getTotalDistance(path));
             System.out.println("\n");
         }
-
         return path;
     }
 }
-
