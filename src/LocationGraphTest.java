@@ -34,7 +34,7 @@ class LocationGraphTest {
         graph.addLocation("State College");
         graph.addLocation("Philadelphia");
 
-        graph.addDistance("New York", "Philadelphia", 1000.00);
+        graph.addDistance("New York", "Philadelphia", 100.00);
         graph.addDistance("New York", "San Diego", 400.00);
         graph.addDistance("Philadelphia", "State College", 200.00);
         // Test case 1: adding a new edge, return true

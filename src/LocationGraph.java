@@ -4,15 +4,13 @@ import java.util.*;
 public class LocationGraph {
 
     ArrayList<Location> locations;
-    ArrayList<Location> path;
-
     public LocationGraph() {
-        this.locations = new ArrayList<Location>();
+        this.locations = new ArrayList<>();
     }
 
     public int getIndex(String vertex) {
         for (int i = 0; i < this.locations.size(); i++) {
-            if (this.locations.get(i).locationName == vertex)
+            if (this.locations.get(i).locationName.equals(vertex))
                 return i;
         }
         return -1;
@@ -29,7 +27,7 @@ public class LocationGraph {
             this.locations.add(toAdd);
             return true;
         } else {
-            //System.out.println("Location " + location + " already exists.");
+            System.out.println("Location " + location + " already exists.");
         }
         return false;
     }
@@ -63,8 +61,8 @@ public class LocationGraph {
         distanceEdge toAddEnd = new distanceEdge(end, start, distance);
 
         for (int i = 0; i < start.distedges.size(); i++) {
-            if (start.distedges.get(i).locationA.locationName == locationA &&
-                    start.distedges.get(i).locationB.locationName == locationB) {
+            if (start.distedges.get(i).locationA.locationName.equals(locationA) &&
+                    start.distedges.get(i).locationB.locationName.equals(locationB)) {
                 //System.out.println("Distance already exists in Graph");
                 return false;
             }
@@ -206,19 +204,17 @@ public class LocationGraph {
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder();
-        str.append("\t\t\t\t");
-        for (int x = 0; x < this.locations.size(); x++) {
-            Location a = this.locations.get(x);
+        str.append("\t\t\t");
+        for (Location a : this.locations) {
             str.append(a.getName());
             str.append("\t");
         }
         str.append("\n");
-        for (int x = 0; x < this.locations.size(); x++) {
-            Location a = this.locations.get(x);
+        for (int i = 0; i < this.locations.size(); i++) {
+            Location a = this.locations.get(i);
             str.append(a.getName());
             str.append("\t\t");
-            for (int y = 0; y < this.locations.size(); y++) {
-                Location b = this.locations.get(y);
+            for (Location b : this.locations) {
                 str.append(String.format(" %.2f", findDistanceBreadthFirst(a.getName(), b.getName())));
                 str.append("\t\t");
                 //str.append(String.format(" %.2f",findDistanceDepthFirst(a.getName(),b.getName())));
@@ -257,8 +253,8 @@ public class LocationGraph {
             return null;
         }
 
-        for (int i = 0; i < this.locations.size(); i++) {
-            if (this.locations.get(i).equals(start)) {
+        for (Location location : this.locations) {
+            if (location.equals(start)) {
                 distances.add(0.0);
             } else {
                 distances.add(Double.POSITIVE_INFINITY);
